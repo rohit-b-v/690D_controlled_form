@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Privacy Filter · Form Lab</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#eef2f6;color:#192b3e;font:16px system-ui,sans-serif}header{background:#152f46;color:white;padding:26px 20px}header div,main{max-width:680px;margin:auto}small{letter-spacing:.12em;color:#9ce1d3}h1{font-size:28px;margin:8px 0}p{line-height:1.5}.badge{display:inline-block;background:#d8f4eb;color:#155c48;border-radius:20px;padding:6px 12px;font-size:13px}main{padding:22px 16px 40px}section{background:white;border:1px solid #dce3ea;border-radius:14px;padding:22px;margin:18px 0}h2{font-size:19px;margin:0 0 18px}label{display:block;font-weight:600;margin:16px 0 7px}input,textarea,select{width:100%;font:inherit;padding:13px;border:1px solid #9baabb;border-radius:7px;background:white;color:#192b3e}input:focus,textarea:focus,select:focus{outline:3px solid #b0e5db;border-color:#167e6a}button{font:inherit;font-weight:600;border:0;border-radius:8px;padding:13px 18px;background:#126e60;color:white;cursor:pointer;margin:5px 5px 5px 0}.secondary{background:#e7edf3;color:#243e54}.note{font-size:14px;color:#53677b}dl{margin:0}dt{color:#53677b;font-size:14px;margin-top:14px}dd{margin:4px 0;font-weight:600}.check{display:flex;gap:10px;align-items:center}.check input{width:20px;height:20px}.check label{margin:0;font-weight:400}#result{padding:0 5px;font-weight:600}footer{font-size:13px;color:#53677b}
+</style>
+<header><div><small>ON-DEVICE PRIVACY / TEST LAB</small><h1>Account details</h1><p>A controlled screen for accessibility extraction and task-aware redaction.</p></div></header>
+<main>
+<span class="badge">Synthetic data only · Offline demo</span>
+<section aria-labelledby="task-heading"><h2 id="task-heading">Test task</h2><label for="task">Task for the agent</label><select id="task"><option>Update my shipping address</option><option>Change my email address</option><option>Find the Save changes button</option></select><p class="note">Record this task alongside your captured JSON. This selector does not connect to the Android app or run a privacy model.</p></section>
+<form id="account-form">
+<section aria-labelledby="contact-heading"><h2 id="contact-heading">Contact information</h2>
+<label for="full-name">Full name</label><input id="full-name" name="fullName" autocomplete="off" value="Jordan Avery" placeholder="Full name">
+<label for="email">Email address</label><input id="email" name="email" type="email" autocomplete="off" value="jordan.avery@example.com" placeholder="Email address">
+<label for="phone">Phone number</label><input id="phone" name="phone" type="tel" autocomplete="off" value="+1 202-555-0148" placeholder="Phone number">
+</section>
+<section aria-labelledby="shipping-heading"><h2 id="shipping-heading">Shipping address</h2>
+<label for="street">Street address</label><input id="street" name="street" autocomplete="off" value="123 Example Lane" placeholder="Street address">
+<label for="city">City</label><input id="city" name="city" autocomplete="off" value="Amherst" placeholder="City">
+<label for="state">State</label><input id="state" name="state" autocomplete="off" value="MA" placeholder="State">
+<label for="postal">ZIP code</label><input id="postal" name="postalCode" inputmode="numeric" autocomplete="off" value="01002" placeholder="ZIP code">
+<label for="instructions">Delivery instructions</label><textarea id="instructions" name="instructions" rows="3" placeholder="Delivery instructions">Leave the package at reception. Contact jordan.avery@example.com if needed.</textarea>
+</section>
+<section aria-labelledby="security-heading"><h2 id="security-heading">Security</h2><label for="password">Demo password</label><input id="password" name="password" type="password" autocomplete="new-password" value="SyntheticOnly!42"><p class="note">Tests password-field handling. This is a dummy value.</p></section>
+<section aria-labelledby="summary-heading"><h2 id="summary-heading">Unrelated account information</h2><p class="note">Tests sensitive text outside editable fields.</p><dl><dt>Account holder</dt><dd>Jordan Avery</dd><dt>Account balance</dt><dd>$2,340.18</dd><dt>Account reference</dt><dd>DEMO-ACCOUNT-4821</dd><dt>Recovery email</dt><dd>jordan.avery@example.com</dd></dl><p>Membership: Standard · Delivery: 3–5 business days</p></section>
+<section><div class="check"><input id="updates" name="updates" type="checkbox"><label for="updates">Send delivery updates</label></div><p><button type="submit">Save changes</button><button class="secondary" type="reset">Reset demo data</button></p><p id="result" role="status" aria-live="polite"></p></section>
+</form>
+<footer>No requests, storage, analytics, or real account changes. Reloading or resetting restores the synthetic values. Scroll to capture each section: the active viewport may expose only part of the form.</footer>
+</main>
+<script>
+const form=document.getElementById('account-form');
+const result=document.getElementById('result');
+form.addEventListener('submit',event=>{event.preventDefault();result.textContent='Demo changes accepted locally. Nothing was sent.';});
+form.addEventListener('reset',()=>{result.textContent='Demo data reset.';});
+</script>
+</html>
